@@ -10,6 +10,7 @@
     "dev": "node scripts/dev.mjs",
     "build": "npm run build -w client && npm run build -w server",
     "start": "npm run start -w server",
+    "start:server": "npm run start -w server",
     "test": "npm test -w server",
     "prisma:generate": "node node_modules/prisma/build/index.js generate --schema prisma/schema.prisma",
     "lint": "echo \"No lint configured\""

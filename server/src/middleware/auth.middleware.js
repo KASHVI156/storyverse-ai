@@ -9,6 +9,7 @@ export function requireAuth(req, res, next) {
   }
 
   try {
+    if (!process.env.JWT_SECRET) return res.status(500).json({ error: 'JWT_SECRET is not configured' });
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     req.user = {
       id: payload.sub,

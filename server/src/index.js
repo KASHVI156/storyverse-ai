@@ -4,6 +4,7 @@ import { Server } from 'socket.io';
 import jwt from 'jsonwebtoken';
 import { connectMongo } from './lib/mongo.js';
 import { createApp } from './app.js';
+import { corsOrigin } from './lib/cors.js';
 
 dotenv.config({ path: process.env.DOTENV_CONFIG_PATH || undefined });
 
@@ -13,7 +14,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.CORS_ORIGIN,
+    origin: corsOrigin,
     credentials: true,
   },
 });

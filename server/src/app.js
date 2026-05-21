@@ -14,6 +14,7 @@ import { favoritesRouter } from './routes/favorites.routes.js';
 import { contactRouter } from './routes/contact.routes.js';
 import { sessionRouter } from './routes/session.routes.js';
 import { analyticsRouter } from './routes/analytics.routes.js';
+import { corsOrigin } from './lib/cors.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -23,11 +24,12 @@ export function createApp({ io = null } = {}) {
   app.locals.io = io;
   app.locals.mongoOk = false;
 
+  app.set('trust proxy', 1);
   app.set('view engine', 'ejs');
   app.set('views', path.resolve(__dirname, 'views'));
 
   app.use(helmet({ contentSecurityPolicy: false }));
-  app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }));
+  app.use(cors({ origin: corsOrigin, credentials: true }));
   app.use(cookieParser());
   app.use(
     session({

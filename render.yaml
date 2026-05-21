@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: storyverse-ai-server
+    name: storyverse-ai-api
     env: node
     rootDir: .
-    buildCommand: npm install && npm run build
+    buildCommand: npm install && npm run build -w server
     startCommand: npm run start
     envVars:
       - key: NODE_ENV
@@ -11,6 +11,8 @@ services:
       - key: PORT
         value: 5000
       - key: CORS_ORIGIN
+        sync: false
+      - key: FRONTEND_URL
         sync: false
       - key: MONGODB_URI
         sync: false
