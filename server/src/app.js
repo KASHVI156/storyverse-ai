@@ -23,6 +23,13 @@ export function createApp({ io = null } = {}) {
 
   app.locals.io = io;
   app.locals.mongoOk = false;
+  app.locals.mongoStatus = {
+    ok: false,
+    host: null,
+    hasMONGODB_URI: Boolean(process.env.MONGODB_URI),
+    hasMONGO_URI: Boolean(process.env.MONGO_URI),
+    message: 'not connected yet',
+  };
 
   app.set('trust proxy', 1);
   app.set('view engine', 'ejs');
@@ -50,7 +57,18 @@ export function createApp({ io = null } = {}) {
   app.use('/uploads', express.static(path.resolve(__dirname, '../uploads')));
 
   app.get('/health', (req, res) => {
-    res.json({ ok: true, mongoOk: !!app.locals.mongoOk });
+    res.json({
+      ok: true,
+      mongoOk: !!app.locals.mongoOk,
+      mongo: app.locals.mongoStatus,
+      env: {
+        nodeEnv: process.env.NODE_ENV || 'development',
+        hasJWT_SECRET: Boolean(process.env.JWT_SECRET),
+        hasSESSION_SECRET: Boolean(process.env.SESSION_SECRET),
+        hasCORS_ORIGIN: Boolean(process.env.CORS_ORIGIN),
+        hasFRONTEND_URL: Boolean(process.env.FRONTEND_URL),
+      },
+    });
   });
 
   app.get('/server-status', (req, res) => {

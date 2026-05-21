@@ -42,14 +42,19 @@ io.on('connection', (socket) => {
 
 (async () => {
   try {
-    await connectMongo();
+    const mongoStatus = await connectMongo();
     app.locals.mongoOk = true;
+    app.locals.mongoStatus = mongoStatus;
   } catch (err) {
     app.locals.mongoOk = false;
+    app.locals.mongoStatus = err?.mongoStatus || {
+      ok: false,
+      message: err?.message || 'MongoDB unavailable',
+    };
     if (err?.isMongoUnavailable) {
-      console.warn('MongoDB unavailable. DB-backed endpoints will return 503.');
+      console.warn('MongoDB unavailable. DB-backed endpoints will return 503.', app.locals.mongoStatus);
     } else {
-      console.error('Unexpected startup error (Mongo).');
+      console.error('Unexpected startup error (Mongo).', err?.message || err);
     }
   }
 
