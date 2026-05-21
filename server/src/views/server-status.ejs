@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= title %></title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 2rem; background: #f8fafc; color: #0f172a; }
+      main { max-width: 680px; }
+      .ok { color: #047857; font-weight: 700; }
+      .bad { color: #be123c; font-weight: 700; }
+      dl { display: grid; grid-template-columns: 10rem 1fr; gap: .75rem 1rem; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1><%= title %></h1>
+      <dl>
+        <dt>MongoDB</dt>
+        <dd class="<%= mongoOk ? 'ok' : 'bad' %>"><%= mongoOk ? 'connected' : 'unavailable' %></dd>
+        <dt>Environment</dt>
+        <dd><%= nodeEnv %></dd>
+        <dt>Rendered at</dt>
+        <dd><%= time %></dd>
+      </dl>
+    </main>
+  </body>
+</html>
