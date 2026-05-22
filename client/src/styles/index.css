@@ -41,6 +41,61 @@ html.dark .glass {
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.28);
 }
 
+select,
+input,
+textarea {
+  color: #0f172a;
+}
+
+select {
+  background-color: rgba(255, 255, 255, 0.82);
+  color: #0f172a;
+}
+
+select option {
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+select option:checked,
+select option:hover {
+  background-color: #e0f2fe;
+  color: #0f172a;
+}
+
+html.dark select,
+html.dark input,
+html.dark textarea {
+  color: #f8fafc;
+}
+
+html.dark select {
+  background-color: rgba(15, 23, 42, 0.92);
+  color: #f8fafc;
+}
+
+html.dark select option {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+html.dark select option:checked,
+html.dark select option:hover {
+  background-color: #1e293b;
+  color: #ffffff;
+}
+
+select:disabled,
+html.dark select:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.25);
+}
 
 * { scroll-behavior: smooth; }
 
